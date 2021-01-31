@@ -1,40 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "./app.scss";
-import axios from "axios";
-import MovieList from "./MovieList";
+import Home from "./components/Home";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Login from "./components/Login";
+import NavBarTop from "./components/Nav";
+import SignUp from "./components/SignUp";
+import { auth } from "./components/FireBase";
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout } from "./Actions/LoginAction";
+import Images from "./components/Images";
+import Posts from "./components/Posts";
+import Albums from "./components/Albums";
+import PostsInfo from "./components/PostsInfo";
+import AlbumInfo from "./components/AlbumInfo";
+import PrivateRoute from "./components/Routes.js/PrivateRoute";
 function App() {
-  const [data, setData] = useState([]);
-  const [value, setValue] = useState("");
-  const searchHandler = async (e) => {
-    setValue(e.target.value);
-    const searchData = await axios.get(
-      `https://api.themoviedb.org/3/search/movie?api_key=d426d6313a2fa8be90e8499b017bdfe4&language=en-US&query=${value}&page=1&include_adult=false`
-    );
-    setData(searchData.data.results);
-    console.log(data);
-  };
+  const { userInfo, isAuthenticated } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   return (
-    <div className="searchdiv">
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => searchHandler(e)}
-        placeholder="Search movies.."
-        className="search"
-      />
-      <div className="movieContainer">
-        {data.length > 0 &&
-          data.map((obj) => (
-            <MovieList
-              poster_path={obj.poster_path}
-              title={obj.original_title}
-              release_date={obj.release_date}
-              vote_average={obj.vote_average}
-              overview={obj.overview}
-            />
-          ))}
-      </div>
-    </div>
+    <Router >
+      <NavBarTop />
+      <Switch>
+      
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/login" component={Login} />
+        <PrivateRoute exact path="/home"  component={Home}/>
+        <PrivateRoute exact path="/images"  component={Images}/>
+        <PrivateRoute exact path="/posts" component={Posts}/>
+        <PrivateRoute exact path="/posts/:id" component={PostsInfo}/>
+        <PrivateRoute exact path="/albums" component={Albums}/>
+        <PrivateRoute exact path="/albums/:id" component={AlbumInfo}/>
+       
+      </Switch>
+    </Router>
   );
 }
 
