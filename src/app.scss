@@ -1,46 +1,79 @@
 *{
     padding: 0%;
-    margin: 0%;
+    margin: 0px;
     box-sizing: border-box;
+    font-family: sans-serif
 }
-a{
-    text-decoration: none !important;
-    color: white !important
-}
-.welcome{
-    text-align: center;
-}
-.card{
-    width: 35%;
-    margin: auto;
-    margin-top: 12px;
-    display: flex;
-}
-h5{
-    text-decoration: underline;
-    text-align: center;
-    color: rgb(134, 132, 129);
-}
-input{
-    width: 80% !important;
-    height: 17px !important;
-   
-}
-label{
-    font-size: 16px;
-    line-height: 2rem !important;
-    
-}
-.card{
-    padding: 12px;
-}
-button{
-    width: 50%;
-    display: block;
-    margin: auto;
-}
-.header{
-    text-align: center;
+body{
+    overflow-x: hidden;
 }
 
- 
+// cart Screen
+.cartBtn{
+    margin: 5px 25px 0px 0px;
+    position: relative;
+}
+.cart{
+    display: block;
+   margin-left: auto;
+   padding: 2px 18px;
+   color: rgb(177, 100, 100);
+   background-color: yellow;
+   border: 1px solid rgb(87, 84, 84);
+
+}
+.cartScreen{
+    background: rgb(107, 107, 177);
+    width: 50%;
+    height: 39rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow-y: scroll;
+    transform: translateX(100%);
+    transition: all 1s ease-in-out;
+}
+.showCart{
+    transform: translateX(-0%);
+}
+
+h1{
+    text-align: center;
+}
+.cartScreenTitle{
+    color: rgb(238, 232, 220);
+}
+.cartScrrenDetails{
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.closeCart{
+  display: block;
+  padding: 2px 13px;
+  margin-left: auto; 
+  margin-top: -23px;
+}
+
+// home screen
+h2{
+    text-align: center;
+}
+.productList{
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(300px ,1fr) );
+}
+.card{
+    border: 1px solid black;
+    text-align: center;
+    padding: 12px;
+    .productListName{
+        color: rgb(70, 68, 68);
+        font-weight: lighter;
+        font-family: 'Times New Roman', Times, serif;
+      
+    }
+}
+
+
